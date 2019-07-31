@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <title>スロットマシンをつくろう</title>
+  </head>
+  <body>
+    <h3>スロットマシンをつくろう</h3>
+    <p>履歴の残るスロットマシンを作りましょう</p>
+
+    <img src="/robot.png" alt="ロボット画像">
+
+    <p>ボタンを押して下さい</p>
+
+    <form action="/" method="GET">
+      <input type="submit" value="stop">
+    </form>
+
+    <form action="/clear" method="POST">
+      <input type="submit" value="履歴をクリア">
+    </form>
+
+    <p><%= @status %></p>
+
+    <hr>
+    <h3>履歴</h3>
+    <ul>
+      <% @results&.each do |result| %>
+        <li>
+          <% if result[0] == result[1] && result[1] == result[2] && result[2] == result[0] %>
+            <%= "#{result[0]}が揃いました" %>
+          <% else %>
+            <%= result %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </body>
+</html>
+
