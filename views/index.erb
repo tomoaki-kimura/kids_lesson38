@@ -1,40 +1,52 @@
 <!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <meta charset="UTF-8">
-    <title>スロットマシンをつくろう</title>
-  </head>
-  <body>
-    <h3>スロットマシンをつくろう</h3>
-    <p>履歴の残るスロットマシンを作りましょう</p>
 
-    <img src="/robot.png" alt="ロボット画像">
+<head>
+  <meta charset="UTF-8">
+  <title>くりかえしを制御しよう</title>
+  <link href="/layout.css" rel="stylesheet">
+</head>
 
-    <p>ボタンを押して下さい</p>
-
-    <form action="/" method="GET">
-      <input type="submit" value="stop">
+<body>
+<div class="wrapper">
+  <div class="contents">
+    <div class="result">
+      <p>
+        <span class="slot1"><%= @status[0] %></span>
+        <span class="slot2"><%= @status[1] %></span>
+        <span class="slot3"><%= @status[2] %></span>
+      </p>
+    </div>
+    <div class="try">
+      スロットを回してみましょう
+    </div>
+    <form action="/" method="GET" class="form slot-button">
+      <input type="submit" value="ストップ">
     </form>
-
-    <form action="/clear" method="POST">
+    <form action="/clear" method="POST" class="form reset-button">
       <input type="submit" value="履歴をクリア">
     </form>
-
-    <p><%= @status %></p>
-
-    <hr>
-    <h3>履歴</h3>
-    <ul>
+  </div>
+  <div class="result-list">
+    <table>
+      <tr>
+        <th>履歴</th>
+      </tr>
       <% @results&.each do |result| %>
-        <li>
-          <% if result[0] == result[1] && result[1] == result[2] && result[2] == result[0] %>
-            <%= "#{result[0]}が揃いました" %>
-          <% else %>
-            <%= result %>
-          <% end %>
-        </li>
+        <tr>
+          <td>
+            <% if result[0] == result[1] && result[1] == result[2] && result[2] == result[0] %>
+              <%= "#{result[0]}が揃いました" %>
+            <% else %>
+              <%= result.join(", ") %>
+            <% end %>
+          </td>
+        </tr>
       <% end %>
-    </ul>
-  </body>
+    </table>
+  </div>
+</div>
+</body>
+
 </html>
 
